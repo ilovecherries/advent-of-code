@@ -3,10 +3,12 @@ Advent of Code - Day 1 - 2021
 Cherry
 """
 
+from itertools import tee
+
 
 def day1_part1(input):
-    l = len(input) - 1
-    n, n2 = iter(input[:l]), iter(input[1:])
+    n, n2 = tee(iter(input))
+    next(n2, None)
     larger = 0
     for i, j in zip(n, n2):
         if j > i:
@@ -15,8 +17,10 @@ def day1_part1(input):
 
 
 def day1_part2(input):
-    l = len(input) - 1
-    n, n2, n3 = iter(input[:l-1]), iter(input[1:l]), iter(input[2:])
+    n, n2, n3 = tee(iter(input), 3)
+    next(n2, None)
+    next(n3, None)
+    next(n3, None)
     larger = 0
     old_sum = None
     for i, j, k in zip(n, n2, n3):
