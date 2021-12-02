@@ -31,12 +31,11 @@ def day1_part2(input):
     return larger
 
 
-if __name__ == '__main__':
-    with open('day1_part1_test.txt') as f:
-        input = [int(x) for x in f.readlines()]
-        assert day1_part1(input) == 7
-        assert day1_part2(input) == 5
-    with open('day1.txt') as f:
-        input = [int(x) for x in f.readlines()]
-        print(day1_part1(input))
-        print(day1_part2(input))
+with open('day1_part1_test.txt') as f:
+    input = [int(x) for x in f.readlines()]
+    assert day1_part1(input) == 7
+    assert day1_part2(input) == 5
+with open('day1.txt') as f:
+    input = [int(x) for x in f.readlines()]
+    print(day1_part1(input))
+    print(day1_part2(input))
