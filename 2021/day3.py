@@ -37,15 +37,10 @@ def day3_part1(input):
 def day3_part2(input):
     input = input.split('\n')
     values = [seperate_bits(i) for i in reduce(reduce_input, input, [])]
-    # oxygen generator rating and co2 rating
-    # oh this filtering
-    # so we must do a pass for each value and match it against the input
-    # and see if each bit is true
     def oxy_lambda(x): return [i for i, _ in x]
     def co2_lambda(x): return [j for _, j in x]
     oxygen = oxy_lambda(values)
     co2 = co2_lambda(values)
-    # so filter out the oxygen first i guess
 
     def get_rating(bits, get_input):
         inputcopy = input.copy()
