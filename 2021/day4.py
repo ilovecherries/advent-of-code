@@ -10,7 +10,7 @@ def transpose(l):
     return list(map(list, zip(*l)))
 
 
-def winning_board(winning, boards):
+def parse_board(winning, boards):
     numbers = set()
     for i in winning:
         numbers.add(i)
