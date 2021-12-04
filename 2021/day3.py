@@ -26,34 +26,34 @@ def scan_input(input):
     return [seperate_bits(i) for i in reduce(reduce_input, input, [])]
 
 
+def oy(x): return [i for i, _ in x]
+def c2(x): return [j for _, j in x]
+
+
 def day3_part1(input):
     input = input.split('\n')
     values = scan_input(input)
-    gamma = int(''.join([str(x) for x, _ in values]), 2)
-    epsilon = int(''.join([str(y) for _, y in values]), 2)
+    gamma = int(''.join([str(x) for x in oy(values)]), 2)
+    epsilon = int(''.join([str(x) for x in c2(values)]), 2)
     return gamma * epsilon
 
 
 def day3_part2(input):
     input = input.split('\n')
     values = [seperate_bits(i) for i in reduce(reduce_input, input, [])]
-    def oxy_lambda(x): return [i for i, _ in x]
-    def co2_lambda(x): return [j for _, j in x]
-    oxygen = oxy_lambda(values)
-    co2 = co2_lambda(values)
+    oxygen = oy(values)
+    co2 = c2(values)
 
     def get_rating(bits, get_input):
-        inputcopy = input.copy()
-        i = 0
-        while i < len(bits):
-            inputcopy = list(filter(lambda x: int(x[i]) == bits[i], inputcopy))
-            if len(inputcopy) == 1:
-                break
-            bits = get_input(scan_input(inputcopy))
-            i += 1
-        return int(inputcopy.pop(), 2)
-    oxygen_rating = get_rating(oxygen, oxy_lambda)
-    co2_rating = get_rating(co2, co2_lambda)
+        def refine(bits, copy, i=0):
+            copy = list(filter(lambda x: int(x[i]) == bits[i], copy))
+            if len(copy) == 1:
+                return int(copy.pop(), 2)
+            bits = get_input(scan_input(copy))
+            return refine(bits, copy, i+1)
+        return refine(bits, input.copy())
+    oxygen_rating = get_rating(oxygen, oy)
+    co2_rating = get_rating(co2, c2)
     return oxygen_rating * co2_rating
 
 
