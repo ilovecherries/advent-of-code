@@ -3,8 +3,6 @@ Advent of Code 2021 - Day 5
 Cherry
 """
 
-from typing import Counter
-
 
 def destructure_coord(i):
     return tuple([int(x) for x in i.split(',')])
@@ -59,9 +57,14 @@ def day5_part1(input, filter_diagonal=True):
         input = [x for x in input if not is_diagonal(x)]
     input = [hash(i)
              for i in sum([generate_points(x) for x in input], [])]
-    matches = [x for x, c in Counter(input).items() if c > 1]
+    matches = {}
+    for i in input:
+        if i not in matches:
+            matches[i] = 0
+        matches[i] += 1
+    result = [i for i, c in matches.items() if c > 1]
 
-    return len(matches)
+    return len(result)
 
 
 with open('day5.test.txt') as f:
