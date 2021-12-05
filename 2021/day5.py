@@ -4,7 +4,6 @@ Cherry
 """
 
 from typing import Counter
-import numpy as np
 
 
 def destructure_coord(i):
@@ -58,8 +57,8 @@ def day5_part1(input, filter_diagonal=True):
     # remove diagonal lines
     if filter_diagonal:
         input = [x for x in input if not is_diagonal(x)]
-    input = np.array([hash(i)
-                     for i in sum([generate_points(x) for x in input], [])])
+    input = [hash(i)
+             for i in sum([generate_points(x) for x in input], [])]
     matches = [x for x, c in Counter(input).items() if c > 1]
 
     return len(matches)
